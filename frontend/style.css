@@ -9,6 +9,11 @@ body {
     font-family: 'Source Sans Pro', sans-serif ;
 }
 
+#like_button_container{
+    width: 100px;
+    height: 100px;
+}
+
 .calculator{
     height: 440px;
     width: 440px;
