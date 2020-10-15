@@ -1,53 +1,72 @@
 
 .message-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.message-box-header{
+    font-size: 2rem;
+    color: rgba(51, 69, 150, 0.966);
+    text-align: center;
+}
+
+.message-box-main{
+    display: flex;
+    flex-direction: column;
+    overflow-y:scroll;
 }
 
 .message {
     display: flex;
+    color: rgb(43, 43, 43);
+
     width: 500px;
-    height: 100px;
+}
+
+.message.even{
+    background-color: rgb(240, 238, 238);
+}
+
+.message.odd{
+    background-color: white;
 }
 
 .message-left{
-    width: 20%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.message-avatar {
+    font-size: 3.2rem;
 }
 
 .message-right{
-    width: 80%;
-    height: 100%;
+    width: 200px;
     display: flex;
     flex-direction: column;
 }
 
-.message-avatar-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .message-header{
-    height: 30%;
-    width: 100%;
     display:flex;
+    white-space: nowrap;
+    padding: 5px 5px 2px 5px;
 }
 
 .message-name{
-    width: 30%;
-    height: 100%;
+    font-size: 1.1rem;
+    margin-right: 5px;
+    font-weight: bold;
 }
 
 .message-time{
-    width:70%;
-    height: 100%;
+    font-size: 0.9rem;
+    font-weight: lighter;
+    color: rgb(161, 161, 161);
 }
 
 .message-content{
-    width: 100%;
-    height: 70%;
+    padding: 2px 5px 5px 5px;
+    font-size: 1rem;
 }

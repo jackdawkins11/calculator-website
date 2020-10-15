@@ -3,9 +3,7 @@
 function MessageLeft(props) {
     return (
         <div className="message-left">
-            <div className="message-avatar-wrapper">
-                <div className="message-avatar">{props.avatarChar}</div>
-            </div>
+            <div className="message-avatar">{props.avatarChar}</div>
         </div>
     );
 }
@@ -26,7 +24,7 @@ function MessageRight(props) {
 
 function Message(props) {
     return (
-        <div className="message">
+        <div className={"message " + props.parity}>
             <MessageLeft avatarChar={props.avatarChar} />
             <MessageRight messageSenderName={props.messageSenderName}
                 messageTime={props.messageTime}
@@ -42,11 +40,13 @@ function MessageBoxHeader(props) {
 }
 
 function MessageBoxMain(props) {
-    let rows = props.messages.map((message) => {
+    let rows = props.messages.map((message, idx) => {
+        let parity = idx % 2 == 0 ? 'even' : 'odd';
         return (<Message avatarChar={message.avatarChar}
             messageSenderName={message.messageSenderName}
             messageTime={message.messageTime}
-            messageContent={message.messageContent} />
+            messageContent={message.messageContent}
+            parity={parity} />
         );
     });
     return (
@@ -54,7 +54,7 @@ function MessageBoxMain(props) {
     );
 }
 
-function MessageBox( props ){
+function MessageBox(props) {
     return (
         <div className="message-box">
             <MessageBoxHeader />
@@ -63,4 +63,4 @@ function MessageBox( props ){
     );
 }
 
-export {MessageBox} ;
+export { MessageBox };

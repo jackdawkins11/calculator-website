@@ -1,8 +1,6 @@
 import {Calculator} from './Calculator.js';
 import {MessageBox} from './MessageBox.js';
 
-ReactDOM.render(<Calculator screenValue={0}/>, document.getElementById("root"));
-
 let message = { 'avatarChar': 'M',
     'messageSenderName': 'Muna Roy',
     'messageTime': '12:53 pm',
@@ -10,8 +8,15 @@ let message = { 'avatarChar': 'M',
 };
 
 let messages = [];
-for( let i=0; i < 5; i++ ){
+for( let i=0; i < 10; i++ ){
     messages.push( message );
 }
 
-//ReactDOM.render(<MessageBox messages={messages}/>, document.getElementById("root2"));
+let root = (
+    <div className="homepage">
+    <Calculator screenValue={0}/>
+    <MessageBox messages={messages}/>
+    </div>
+    );
+
+ReactDOM.render(root, document.getElementById("root"));
