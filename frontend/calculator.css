@@ -43,6 +43,10 @@
     font-size: 1.3rem;
 }
 
+.calculator-button:hover{
+    cursor: pointer;
+}
+
 .equal-button.calculator-button{
     flex-grow: 5;
     
