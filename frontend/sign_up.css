@@ -1,0 +1,83 @@
+
+.sign-up{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    padding: 100px 200px;
+
+    background: rgb(250, 250, 250);
+
+    border: 2px solid gray;
+    border-radius: 10px;
+
+    font-size: 1.2rem;
+}
+
+.sign-up>div{
+    margin: 10px;
+}
+
+input:focus{
+    outline: none;
+}
+
+input{
+    outline: none;
+    border: none;
+    border-bottom: 1px dotted gray;
+    background: inherit;
+}
+
+.sign-up-username-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-username{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.sign-up-username > *{
+    margin: 5px;
+}
+
+.sign-up-username-label{
+    color: gray;
+}
+
+.sign-up-password-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-password{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.sign-up-password > *{
+    margin: 5px;
+}
+
+.sign-up-password-label{
+    color: gray;
+}
+
+.sign-up-button{
+
+    padding: 5px;
+
+    border-radius: 5px;
+
+    border: 1px solid white;
+
+    background: gray;
+
+    cursor: pointer;
+}

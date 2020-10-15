@@ -1,0 +1,83 @@
+
+.sign-in{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    padding: 100px 200px;
+
+    background: rgb(250, 250, 250);
+
+    border: 2px solid gray;
+    border-radius: 10px;
+
+    font-size: 1.2rem;
+}
+
+.sign-in>div{
+    margin: 10px;
+}
+
+input:focus{
+    outline: none;
+}
+
+input{
+    outline: none;
+    border: none;
+    border-bottom: 1px dotted gray;
+    background: inherit;
+}
+
+.sign-in-username-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-in-username{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.sign-in-username > *{
+    margin: 5px;
+}
+
+.sign-in-username-label{
+    color: gray;
+}
+
+.sign-in-password-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-in-password{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.sign-in-password > *{
+    margin: 5px;
+}
+
+.sign-in-password-label{
+    color: gray;
+}
+
+.sign-in-button{
+
+    padding: 5px;
+
+    border-radius: 5px;
+
+    border: 1px solid white;
+
+    background: gray;
+
+    cursor: pointer;
+}
