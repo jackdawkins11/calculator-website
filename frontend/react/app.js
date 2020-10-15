@@ -14,7 +14,7 @@ for( let i=0; i < 10; i++ ){
 
 let root = (
     <div className="homepage">
-    <Calculator screenValue={0}/>
+    <Calculator />
     <MessageBox messages={messages}/>
     </div>
     );

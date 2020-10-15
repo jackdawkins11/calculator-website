@@ -10,7 +10,8 @@ function CalculatorScreen(props) {
 
 function CalculatorButton(props) {
   return (
-    <div className="calculator-button">
+    <div className="calculator-button"
+      onClick={props.onClick} >
       {props.calculatorButtonValue}
     </div>
   );
@@ -18,7 +19,8 @@ function CalculatorButton(props) {
 
 function CalculatorEqualButton(props) {
   return (
-    <div className="calculator-button equal-button">
+    <div className="calculator-button equal-button"
+      onClick={props.onClick} >
       {props.calculatorButtonValue}
     </div>
   );
@@ -29,27 +31,32 @@ let calculatorButtonValues =
   [['+', '7', '4', '1', '0'],
   ['-', '8', '5', '2', '.'],
   ['*', '9', '6', '3', 'c'],
-  ['%', '=']];
+  ['/', '=']];
 
-function Calculator(props) {
+function CalculatorRender(props) {
   let columns = [];
   //Add the first 3 columns
   for (let c = 0; c < 3; c++) {
     let column = [];
     for (let r = 0; r < 5; r++) {
+      let button = calculatorButtonValues[c][r];
       column.push(
         <CalculatorButton
-          calculatorButtonValue={calculatorButtonValues[c][r]} />
+          calculatorButtonValue={button}
+          onClick={() => props.buttonClick(button)} />
       );
     }
     columns.push(<div className="calculator-column">{column}</div>);
   }
   //Add the last column
+  let buttons = [calculatorButtonValues[3][0], calculatorButtonValues[3][1]];
   let column = [
     <CalculatorButton
-      calculatorButtonValue={calculatorButtonValues[3][0]} />,
+      calculatorButtonValue={buttons[0]}
+      onClick={() => props.buttonClick(buttons[0])} />,
     <CalculatorEqualButton
-      calculatorButtonValue={calculatorButtonValues[3][1]} />
+      calculatorButtonValue={buttons[1]}
+      onClick={() => props.buttonClick(buttons[1])} />
   ];
   columns.push(<div className="calculator-column">{column}</div>);
   return (
@@ -60,6 +67,143 @@ function Calculator(props) {
       </div>
     </div>
   );
+}
+
+/*
+Calculator class.
+It keeps track of its state with the 'inputs' array.
+
+len( inputs ) == 0  ==>  Waiting for first number
+len( inputs ) == 1  ==>  In the process of entering the first number
+len( inputs ) == 2  ==>  The first number and the operation have been entered
+len( inputs ) == 3  ==>  Entering the second number
+
+Digits and '.' can be entered in all 4 states. Ops can only
+be entered in state 1. '=' can only be entered in state 3. 'c'
+can be entered anytime.
+
+*/
+
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      screen: 0
+    };
+    this.inputs = [];
+    this.MAXSCREENDIGITS = 10;
+  }
+
+  /*
+  Takes as input the character entered and updates state
+  */
+  buttonPushed(button) {
+    let inputStep = this.inputs.length;
+    if (isDigit(button)) {
+      if (inputStep === 0) {
+        //Update the inputs array
+        this.inputs.push(button);
+        //update the screen
+        this.setState({ screen: this.inputs[0] });
+      } else if (inputStep === 1) {
+        //Update inputs array
+        this.inputs[0] += button;
+        //update the screen
+        this.setState({ screen: this.inputs[0] });
+      } else if (inputStep === 2) {
+        //Update inputs array
+        this.inputs.push(button);
+        //update the screen
+        this.setState({ screen: this.inputs[2] });
+      } else if (inputStep === 3) {
+        //Update inputs array
+        this.inputs[2] += button;
+        //update the screen
+        this.setState({ screen: this.inputs[2] });
+      }
+    } else if( isDecPoint( button ) ){
+      if (inputStep === 0) {
+        //Update the inputs array
+        this.inputs.push(button);
+        //update the screen
+        this.setState({ screen: this.inputs[0] });
+      } else if (inputStep === 1 && !this.inputs[0].includes( '.' ) ) {
+        //Update inputs array
+        this.inputs[0] += button;
+        //update the screen
+        this.setState({ screen: this.inputs[0] });
+      } else if (inputStep === 2) {
+        //Update inputs array
+        this.inputs.push(button);
+        //update the screen
+        this.setState({ screen: this.inputs[2] });
+      } else if (inputStep === 3 && !this.inputs[2].includes( '.' ) ) {
+        //Update inputs array
+        this.inputs[2] += button;
+        //update the screen
+        this.setState({ screen: this.inputs[2] });
+      }
+    } else if (isOp(button)) {
+      if (inputStep === 1) {
+        //Update inputs array
+        this.inputs.push(button);
+      }
+    } else if (isEqu(button)) {
+      if (inputStep === 3) {
+        let calculation = doCalculation(this.inputs).toPrecision( this.MAXSCREENDIGITS );
+        //update inputs array
+        this.inputs = [];
+        //update the screen
+        this.setState({ screen: calculation });
+      }
+    } else if (isClear(button)) {
+      this.inputs = [];
+      //update the screen
+      this.setState({ screen: 0 });
+    }
+  }
+
+  render() {
+    return <CalculatorRender
+      screenValue={this.state.screen}
+      buttonClick={(c) => this.buttonPushed(c)} />
+  }
+
+}
+
+function isDigit(str) {
+  return str.length === 1 && /[0-9]/.test(str);
+}
+
+function isDecPoint( str ){
+  return str === '.';
+}
+
+function isOp(str) {
+  return str.length === 1 && "+-*/".includes(str);
+}
+
+function isEqu(str) {
+  return str === '=';
+}
+
+function isClear(str) {
+  return str === 'c';
+}
+
+function doCalculation(inputs){
+  let op = inputs[1];
+  let x = parseFloat( inputs[0] );
+  let y = parseFloat( inputs[2] );
+  if (op === '+') {
+    return x + y;
+  } else if (op === '-') {
+    return x - y;
+  } else if (op === '*') {
+    return x * y;
+  } else if (op === '/') {
+    return x / y;
+  }
 }
 
 export { Calculator };
