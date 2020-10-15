@@ -1,0 +1,53 @@
+
+.message-box{
+}
+
+.message {
+    display: flex;
+    width: 500px;
+    height: 100px;
+}
+
+.message-left{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-right{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-avatar-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-header{
+    height: 30%;
+    width: 100%;
+    display:flex;
+}
+
+.message-name{
+    width: 30%;
+    height: 100%;
+}
+
+.message-time{
+    width:70%;
+    height: 100%;
+}
+
+.message-content{
+    width: 100%;
+    height: 70%;
+}
