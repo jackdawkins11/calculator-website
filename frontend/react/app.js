@@ -9,12 +9,22 @@ class App extends React.Component{
             hasSession: false
         };
     }
+    componentDidMount(){
+        this.checkSession();
+    }
     render(){
         if( this.state.hasSession ){
             return (
                 <div className="homepage">
-                <Calculator />
-                <MessageBox messages={getMessages()}/>
+                    <div className="homepage-top-bar">
+                        <div className="sign-out-button" onClick={() => this.signOut()}>
+                            Sign Out
+                        </div>
+                    </div>
+                    <div className="homepage-main">
+                        <Calculator />
+                        <MessageBox messages={getMessages()}/>
+                    </div>
                 </div>
                 );
         }else{
@@ -35,11 +45,19 @@ class App extends React.Component{
                     hasSession: result.hasSession
                 });
             }).catch( (reason) =>{
-                this.errorMessage();
+                this.errorMessage( "There was an error checking for a session: " + reason );
             });
     }
-    errorMessage(){
-        console.log( "There was an error checking for a session." );
+    signOut(){
+        fetch( "../backend/endSession.php" )
+            .then( response => {
+                this.checkSession();
+            }).catch( reason => {
+                this.errorMessage( "There was an error signing out: " + reason );
+            });
+    }
+    errorMessage( message ){
+        console.log( message );
     }
 }
 
