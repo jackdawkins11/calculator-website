@@ -1,13 +1,12 @@
 import {Calculator} from './Calculator.js';
 import {MessageBox} from './MessageBox.js';
-import {SignIn} from './SignIn.js';
-import {SignUp} from './SignUp.js';
+import { AuthPage } from './AuthPage.js';
 
 class App extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            hasSession: true
+            hasSession: false
         };
     }
 
@@ -22,7 +21,7 @@ class App extends React.Component{
         }else{
             return (
                 <div className="auth-page">
-                    <SignIn />
+                    <AuthPage />
                 </div>
             );
         }

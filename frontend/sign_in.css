@@ -1,4 +1,27 @@
 
+.tab-bar{
+    display: flex;
+}
+
+.tab{
+    border: 1px solid black;
+
+    font-size: 1.3rem;
+
+    padding: 10px;
+
+    cursor: pointer;
+}
+
+.tab-active{
+    background-color: rgb(154, 177, 250);
+}
+
+.tab-inactive{
+    background-color: rgb(230, 230, 235);
+}
+
+
 .sign-in{
     display: flex;
     flex-direction: column;

@@ -18,17 +18,6 @@
     margin: 10px;
 }
 
-input:focus{
-    outline: none;
-}
-
-input{
-    outline: none;
-    border: none;
-    border-bottom: 1px dotted gray;
-    background: inherit;
-}
-
 .sign-up-username-wrapper{
     display: flex;
     justify-content: center;

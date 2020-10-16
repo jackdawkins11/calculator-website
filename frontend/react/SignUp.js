@@ -56,6 +56,7 @@ class SignUp extends React.Component {
     render(){
         return (
             <div className="sign-up">
+                 {this.props.tabBar}
                 <SignUpUsername />
                 <SignUpPassword />
                 <SignUpPasswordConfirm />
