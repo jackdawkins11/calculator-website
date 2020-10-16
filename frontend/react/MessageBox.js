@@ -42,7 +42,8 @@ function MessageBoxHeader(props) {
 function MessageBoxMain(props) {
     let rows = props.messages.map((message, idx) => {
         let parity = idx % 2 == 0 ? 'even' : 'odd';
-        return (<Message avatarChar={message.avatarChar}
+        return (<Message key={idx}
+            avatarChar={message.avatarChar}
             messageSenderName={message.messageSenderName}
             messageTime={message.messageTime}
             messageContent={message.messageContent}

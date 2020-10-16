@@ -42,23 +42,26 @@ function CalculatorRender(props) {
       let button = calculatorButtonValues[c][r];
       column.push(
         <CalculatorButton
+          key={button}
           calculatorButtonValue={button}
           onClick={() => props.buttonClick(button)} />
       );
     }
-    columns.push(<div className="calculator-column">{column}</div>);
+    columns.push(<div className="calculator-column" key={c}>{column}</div>);
   }
   //Add the last column
   let buttons = [calculatorButtonValues[3][0], calculatorButtonValues[3][1]];
   let column = [
     <CalculatorButton
+      key = {buttons[0]}
       calculatorButtonValue={buttons[0]}
       onClick={() => props.buttonClick(buttons[0])} />,
     <CalculatorEqualButton
+      key = {buttons[1]}
       calculatorButtonValue={buttons[1]}
       onClick={() => props.buttonClick(buttons[1])} />
   ];
-  columns.push(<div className="calculator-column">{column}</div>);
+  columns.push(<div className="calculator-column" key={3}>{column}</div>);
   return (
     <div className="calculator">
       <CalculatorScreen screenValue={props.screenValue} />
