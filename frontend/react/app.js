@@ -23,7 +23,7 @@ class App extends React.Component{
                     </div>
                     <div className="homepage-main">
                         <Calculator />
-                        <MessageBox messages={getMessages()}/>
+                        <MessageBox />
                     </div>
                 </div>
                 );
@@ -61,19 +61,6 @@ class App extends React.Component{
     }
 }
 
-function getMessages(){
-    let message = { 'avatarChar': 'M',
-    'messageSenderName': 'Muna Roy',
-    'messageTime': '12:53 pm',
-    'messageContent': '2+2=4'
-    };
 
-    let messages = [];
-    for( let i=0; i < 10; i++ ){
-        messages.push( message );
-    }
-
-    return messages;
-}
 
 ReactDOM.render( <App />, document.getElementById("root") );
