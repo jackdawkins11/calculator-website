@@ -67,3 +67,5 @@ function createAccount( $dsn, $dbusername, $dbpassword ){
 }
 
 echo json_encode( createAccount( $dsn, $dbusername, $dbpassword ) );
+
+?>

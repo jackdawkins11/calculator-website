@@ -59,8 +59,10 @@ function startSession( $dsn, $dbusername, $dbpassword ){
     }
     session_start();
     $_SESSION['username'] = $_POST['username'];
-    $_SESSION['primaryKey'] = $signedIn->primaryKey;
+    $_SESSION['primaryKey'] = $signInRet->primaryKey;
     return (object)array("error" => False, "hasSession" => True );
 }
 
 echo json_encode( startSession( $dsn, $dbusername, $dbpassword ) );
+
+?>
