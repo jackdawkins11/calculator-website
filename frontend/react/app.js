@@ -9,7 +9,6 @@ class App extends React.Component{
             hasSession: false
         };
     }
-
     render(){
         if( this.state.hasSession ){
             return (
@@ -21,10 +20,26 @@ class App extends React.Component{
         }else{
             return (
                 <div className="auth-page">
-                    <AuthPage />
+                    <AuthPage
+                        signIn={ () => {this.checkSession() } }
+                    />
                 </div>
             );
         }
+    }
+    checkSession(){
+        fetch( "../backend/checkSession.php" )
+            .then( (response) => response.json() )
+            .then( (result) => {
+                this.setState({
+                    hasSession: result.hasSession
+                });
+            }).catch( (reason) =>{
+                this.errorMessage();
+            });
+    }
+    errorMessage(){
+        console.log( "There was an error checking for a session." );
     }
 }
 
