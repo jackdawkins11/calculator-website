@@ -33,13 +33,7 @@ function Message(props) {
     );
 }
 
-function MessageBoxHeader(props) {
-    return (
-        <div className="message-box-header"> Messages </div>
-    );
-}
-
-function MessageBoxMain(props) {
+function MessageBoxRender(props) {
     let rows = props.messages.map((message, idx) => {
         let parity = idx % 2 == 0 ? 'even' : 'odd';
         return (<Message key={idx}
@@ -51,7 +45,7 @@ function MessageBoxMain(props) {
         );
     });
     return (
-        <div className="message-box-main"> {rows} </div>
+        <div className="message-box"> {rows} </div>
     );
 }
 
@@ -64,10 +58,7 @@ class MessageBox extends React.Component{
     }
     render(){
         return (
-            <div className="message-box">
-                <MessageBoxHeader />
-                <MessageBoxMain messages={this.state.messages} />
-            </div>
+            <MessageBoxRender messages={this.state.messages} />
         );
     }
     componentDidMount(){
@@ -104,7 +95,7 @@ function calculationToMessage( calculation ){
     if( hours == 0 ){
         hours = 12;
     }
-    let minutes = time.getMinutes();
+    let minutes = String(time.getMinutes()).padStart(2, "0");
     let partOfDay = time.getHours() >= 12 ? "PM" : "AM";
     time = String( hours ) + ":" + String( minutes ) + " " + partOfDay; 
     return {

@@ -38,4 +38,5 @@ body{
 
 .homepage-main {
     display: flex;
+    overflow-y: hidden;
 }

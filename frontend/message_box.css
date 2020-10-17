@@ -3,30 +3,17 @@
     display: flex;
     flex-direction: column;
     flex-grow: 2;
-}
-
-.message-box-header{
-    font-size: 2rem;
-    color: rgba(51, 69, 150, 0.966);
-    text-align: center;
-    display: none;
-}
-
-.message-box-main{
-    display: flex;
-    flex-direction: column;
+    height: 100%;
     overflow-y:scroll;
 }
 
 .message {
     display: flex;
     color: rgb(43, 43, 43);
-
-    width: 100%;
 }
 
 .message.even{
-    background-color: rgb(240, 238, 238);
+    background-color: rgb(243, 243, 243);
 }
 
 .message.odd{
