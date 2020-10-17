@@ -154,6 +154,7 @@ class Calculator extends React.Component {
     } else if (isEqu(button)) {
       if (inputStep === 3) {
         let calculation = doCalculation(this.inputs).toPrecision(this.MAXSCREENDIGITS);
+        calculation = parseFloat( calculation );
         this.postCalculation( this.inputs, calculation );
         //update inputs array
         this.inputs = [];
@@ -172,7 +173,7 @@ class Calculator extends React.Component {
       op = inputs[1],
       y = String(inputs[2]),
       val = String(output),
-      date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      date = getDateTimeString();
     let calculation = new URLSearchParams();
     calculation.append("x", x);
     calculation.append("op", op);
@@ -238,6 +239,16 @@ function doCalculation(inputs) {
   } else if (op === '/') {
     return x / y;
   }
+}
+
+function getDateTimeString(){
+  let date = new Date();
+  return date.getFullYear()
+      + "-" + String( date.getMonth() + 1 ).padStart( 2, "0")
+      + "-" + String( date.getDate() ).padStart( 2, "0")
+      + " " + String( date.getHours() ).padStart( 2, "0")
+      + ":" + String( date.getMinutes() ).padStart( 2, "0")
+      + ":" + String( date.getSeconds() ).padStart( 2, "0");
 }
 
 export { Calculator };
