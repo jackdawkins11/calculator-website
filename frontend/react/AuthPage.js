@@ -28,7 +28,7 @@ class AuthPage extends React.Component {
                 <SignIn tabBar={
                 <TabBar signInTab={this.state.signInTab}
                 tabClick={ (b) => this.tabClick(b) } /> }
-                signInButton={ (username, password) => this.signIn(username, password) }
+                signIn={this.props.signIn}
                 />
             );
         }else{
@@ -40,34 +40,7 @@ class AuthPage extends React.Component {
             );
         }
     }
-    signIn( username, password ){
-        let credentials = new URLSearchParams();
-        credentials.append( "username", username );
-        credentials.append( "password", password );
-        fetch( "../backend/startSession.php", {
-            method: "POST",
-            body: credentials
-        }).then( (response) => response.json() )
-        .then( result => {
-            if( !result.error ){
-                if( result.hasSession ){
-                    this.props.signIn();
-                }else{
-                    this.invalidCredentials();
-                }
-            }else{
-                this.errorMessage();
-            }
-        }).catch( (reason) => {
-            this.errorMessage();
-        });
-    }
-    invalidCredentials(){
-        console.log( "Invalid username and password." );
-    }
-    errorMessage(){
-        console.log( "There was an error signing in." );
-    }
+    
 }
 
 

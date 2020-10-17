@@ -39,6 +39,18 @@ function SignUpPasswordConfirm( props ){
     );
 }
 
+function SignUpMessage(props) {
+    let hide = props.message.length == 0;
+    let hideClassName = hide ? "hide" : "";
+    return (
+        <div className="sign-up-message-wrapper">
+            <div className={"sign-up-message" + hideClassName}>
+                {props.message}
+            </div>
+        </div>
+    );
+}
+
 function SignUpButton( props ){
     return (
         <div className="sign-up-button-wrapper">
@@ -55,7 +67,8 @@ class SignUp extends React.Component {
         this.state = {
             username: "",
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            message: ""
         };
     }
     render(){
@@ -65,6 +78,7 @@ class SignUp extends React.Component {
                 <SignUpUsername onChange={ (event) => this.changeUsername(event) } />
                 <SignUpPassword onChange={ (event) => this.changePassword(event) } />
                 <SignUpPasswordConfirm onChange={ (event) => this.changeConfirmPassword(event) } />
+                <SignUpMessage message={this.state.message} />
                 <SignUpButton onClick={ () => this.signUp() } />
             </div>
         );
@@ -89,9 +103,9 @@ class SignUp extends React.Component {
             password = this.state.password,
             confirmPassword = this.state.confirmPassword;
         if( username === "" || password === "" ){
-            this.error( "All fields must be used" );
+            this.invalidInput( "All fields must be used" );
         }else if( password !== confirmPassword ){
-            this.error( "Passwords must match" );
+            this.invalidInput( "Passwords must match" );
         }else{
             this.signUpRequest( username, password );
         }
@@ -109,20 +123,29 @@ class SignUp extends React.Component {
                 if( result.available ){
                     this.success();
                 }else{
-                    this.error( "That username is in use" );
+                    this.invalidInput( "That username is in use" );
                 }
             }else{
-                this.error( "There was an error" );
+                this.error();
             }
         }).catch( (reason) => {
-            this.error( "There was an error" );
+            this.error();
         });
     }
     success(){
-        console.log( "Successfully created account" ); 
+        this.setState({
+            message: "Successfully created account"
+        });
     }
-    error( message ){
-        console.log( "Error: " + message );
+    invalidInput( message ){
+        this.setState({
+            message: "Invalid input: " + message
+        });
+    }
+    error(){
+        this.setState({
+            message: "There was an error signing up"
+        });
     }
 }
 

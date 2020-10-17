@@ -1,6 +1,6 @@
 'use strict';
 
-function SignInUsername( props ){
+function SignInUsername(props) {
     return (
         <div className="sign-in-username-wrapper">
             <div className="sign-in-username">
@@ -13,7 +13,7 @@ function SignInUsername( props ){
     );
 }
 
-function SignInPassword( props ){
+function SignInPassword(props) {
     return (
         <div className="sign-in-password-wrapper">
             <div className="sign-in-password">
@@ -26,7 +26,19 @@ function SignInPassword( props ){
     );
 }
 
-function SignInButton( props ){
+function SignInMessage(props) {
+    let hide = props.message.length == 0;
+    let hideClassName = hide ? "hide" : "";
+    return (
+        <div className="sign-in-message-wrapper">
+            <div className={"sign-in-message" + hideClassName}>
+                {props.message}
+            </div>
+        </div>
+    );
+}
+
+function SignInButton(props) {
     return (
         <div className="sign-in-button-wrapper">
             <div className="sign-in-button" onClick={props.onClick} >
@@ -37,38 +49,69 @@ function SignInButton( props ){
 }
 
 class SignIn extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = ({
             username: "",
-            password: ""
+            password: "",
+            message: ""
         });
     }
-    changeUsername( event ){
+    render() {
+        return (
+            <div className="sign-in">
+                {this.props.tabBar}
+                <SignInUsername onChange={(event) => this.changeUsername(event)} />
+                <SignInPassword onChange={(event) => this.changePassword(event)} />
+                <SignInMessage message={this.state.message} />
+                <SignInButton onClick={() => this.signIn()} />
+            </div>
+        );
+    }
+    changeUsername(event) {
         this.setState({
             username: event.target.value
         });
     }
-    changePassword( event ){
+    changePassword(event) {
         this.setState({
             password: event.target.value
         });
     }
-    render(){
-        return (
-            <div className="sign-in">
-                {this.props.tabBar}
-                <SignInUsername onChange={ (event) => this.changeUsername(event) } />
-                <SignInPassword onChange={ (event) => this.changePassword(event) } />
-                <SignInButton onClick={ () => this.signIn() } />
-            </div>
-        );
-    }
-    signIn(){
+    signIn() {
         let username = this.state.username;
         let password = this.state.password;
-        this.props.signInButton( username, password );
+        let credentials = new URLSearchParams();
+        credentials.append("username", username);
+        credentials.append("password", password);
+        fetch("../backend/startSession.php", {
+            method: "POST",
+            body: credentials
+        }).then((response) => response.json())
+            .then(result => {
+                if (!result.error) {
+                    if (result.hasSession) {
+                        this.props.signIn();
+                    } else {
+                        this.invalidCredentials();
+                    }
+                } else {
+                    this.errorMessage();
+                }
+            }).catch((reason) => {
+                this.errorMessage();
+            });
+    }
+    invalidCredentials() {
+        this.setState({
+            message: "Invalid username and password."
+        });
+    }
+    errorMessage() {
+        this.setState({
+            message: "There was an error signing in."
+        });
     }
 }
 
-export {SignIn};
+export { SignIn };
