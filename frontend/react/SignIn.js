@@ -2,26 +2,22 @@
 
 function SignInUsername(props) {
     return (
-        <div className="sign-in-username-wrapper">
-            <div className="sign-in-username">
-                <div className="sign-in-username-label">
-                    Username
-                </div>
-                <input className="sign-in-username-input" onChange={props.onChange} ></input>
+        <div className="auth-content">
+            <div className="auth-content-label">
+                Username
             </div>
+            <input className="auth-content-input" onChange={props.onChange} ></input>
         </div>
     );
 }
 
 function SignInPassword(props) {
     return (
-        <div className="sign-in-password-wrapper">
-            <div className="sign-in-password">
-                <div className="sign-in-password-label">
-                    Password
-                </div>
-                <input className="sign-in-password-input" onChange={props.onChange} ></input>
+        <div className="auth-content">
+            <div className="auth-content-label">
+                Password
             </div>
+            <input className="auth-content-input" onChange={props.onChange} ></input>
         </div>
     );
 }
@@ -30,8 +26,8 @@ function SignInMessage(props) {
     let hide = props.message.length == 0;
     let hideClassName = hide ? "hide" : "";
     return (
-        <div className="sign-in-message-wrapper">
-            <div className={"sign-in-message" + hideClassName}>
+        <div className="auth-content">
+            <div className="auth-content-message">
                 {props.message}
             </div>
         </div>
@@ -40,8 +36,8 @@ function SignInMessage(props) {
 
 function SignInButton(props) {
     return (
-        <div className="sign-in-button-wrapper">
-            <div className="sign-in-button" onClick={props.onClick} >
+        <div className="auth-content">
+            <div className="auth-content-button" onClick={props.onClick} >
                 Sign In
             </div>
         </div>
@@ -59,8 +55,7 @@ class SignIn extends React.Component {
     }
     render() {
         return (
-            <div className="sign-in">
-                {this.props.tabBar}
+            <div className="auth-box-main">
                 <SignInUsername onChange={(event) => this.changeUsername(event)} />
                 <SignInPassword onChange={(event) => this.changePassword(event)} />
                 <SignInMessage message={this.state.message} />

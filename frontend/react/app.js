@@ -29,11 +29,9 @@ class App extends React.Component{
                 );
         }else{
             return (
-                <div className="auth-page">
-                    <AuthPage
-                        signIn={ () => {this.checkSession() } }
-                    />
-                </div>
+                <AuthPage
+                    signIn={ () => {this.checkSession() } }
+                />
             );
         }
     }
