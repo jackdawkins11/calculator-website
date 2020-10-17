@@ -105,7 +105,7 @@ function calculationToMessage( calculation ){
         hours = 12;
     }
     let minutes = time.getMinutes();
-    let partOfDay = time.getHours() >= 12 ? "pm" : "am";
+    let partOfDay = time.getHours() >= 12 ? "PM" : "AM";
     time = String( hours ) + ":" + String( minutes ) + " " + partOfDay; 
     return {
         messageSenderName: username,

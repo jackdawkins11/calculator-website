@@ -11,6 +11,13 @@ body{
     height: 100%;
 
     font-family: 'Source Sans Pro', sans-serif ;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.homepage-top-bar{
+    border-bottom: 2px solid black;
 }
 
 .sign-out-button{
@@ -31,5 +38,4 @@ body{
 
 .homepage-main {
     display: flex;
-    justify-content: space-around;
 }

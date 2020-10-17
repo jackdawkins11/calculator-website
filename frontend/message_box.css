@@ -2,12 +2,14 @@
 .message-box{
     display: flex;
     flex-direction: column;
+    flex-grow: 2;
 }
 
 .message-box-header{
     font-size: 2rem;
     color: rgba(51, 69, 150, 0.966);
     text-align: center;
+    display: none;
 }
 
 .message-box-main{
@@ -20,7 +22,7 @@
     display: flex;
     color: rgb(43, 43, 43);
 
-    width: 500px;
+    width: 100%;
 }
 
 .message.even{
@@ -36,10 +38,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    padding: 20px;
 }
 
 .message-avatar {
-    font-size: 3.2rem;
+    font-size: 3rem;
 }
 
 .message-right{
@@ -50,12 +54,13 @@
 
 .message-header{
     display:flex;
+    align-items: flex-end;
     white-space: nowrap;
-    padding: 5px 5px 2px 5px;
+    padding: 5px 5px 5px 5px;
 }
 
 .message-name{
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-right: 5px;
     font-weight: bold;
 }

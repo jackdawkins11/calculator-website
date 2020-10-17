@@ -63,10 +63,12 @@ function CalculatorRender(props) {
   ];
   columns.push(<div className="calculator-column" key={3}>{column}</div>);
   return (
-    <div className="calculator">
-      <CalculatorScreen screenValue={props.screenValue} />
-      <div className="calculator-bottom">
-        {columns}
+    <div className="calculator-area">
+      <div className="calculator">
+        <CalculatorScreen screenValue={props.screenValue} />
+        <div className="calculator-bottom">
+          {columns}
+        </div>
       </div>
     </div>
   );
@@ -154,8 +156,8 @@ class Calculator extends React.Component {
     } else if (isEqu(button)) {
       if (inputStep === 3) {
         let calculation = doCalculation(this.inputs).toPrecision(this.MAXSCREENDIGITS);
-        calculation = parseFloat( calculation );
-        this.postCalculation( this.inputs, calculation );
+        calculation = parseFloat(calculation);
+        this.postCalculation(this.inputs, calculation);
         //update inputs array
         this.inputs = [];
         //update the screen
@@ -191,11 +193,11 @@ class Calculator extends React.Component {
           this.error("There was an error");
         }
       }).catch((reason) => {
-        this.error("There was an error " + reason );
+        this.error("There was an error " + reason);
       });
   }
-  error( message ){
-    console.log( message );
+  error(message) {
+    console.log(message);
   }
 
   render() {
@@ -241,14 +243,14 @@ function doCalculation(inputs) {
   }
 }
 
-function getDateTimeString(){
+function getDateTimeString() {
   let date = new Date();
   return date.getFullYear()
-      + "-" + String( date.getMonth() + 1 ).padStart( 2, "0")
-      + "-" + String( date.getDate() ).padStart( 2, "0")
-      + " " + String( date.getHours() ).padStart( 2, "0")
-      + ":" + String( date.getMinutes() ).padStart( 2, "0")
-      + ":" + String( date.getSeconds() ).padStart( 2, "0");
+    + "-" + String(date.getMonth() + 1).padStart(2, "0")
+    + "-" + String(date.getDate()).padStart(2, "0")
+    + " " + String(date.getHours()).padStart(2, "0")
+    + ":" + String(date.getMinutes()).padStart(2, "0")
+    + ":" + String(date.getSeconds()).padStart(2, "0");
 }
 
 export { Calculator };
