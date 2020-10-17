@@ -53,11 +53,11 @@ function CalculatorRender(props) {
   let buttons = [calculatorButtonValues[3][0], calculatorButtonValues[3][1]];
   let column = [
     <CalculatorButton
-      key = {buttons[0]}
+      key={buttons[0]}
       calculatorButtonValue={buttons[0]}
       onClick={() => props.buttonClick(buttons[0])} />,
     <CalculatorEqualButton
-      key = {buttons[1]}
+      key={buttons[1]}
       calculatorButtonValue={buttons[1]}
       onClick={() => props.buttonClick(buttons[1])} />
   ];
@@ -124,13 +124,13 @@ class Calculator extends React.Component {
         //update the screen
         this.setState({ screen: this.inputs[2] });
       }
-    } else if( isDecPoint( button ) ){
+    } else if (isDecPoint(button)) {
       if (inputStep === 0) {
         //Update the inputs array
         this.inputs.push(button);
         //update the screen
         this.setState({ screen: this.inputs[0] });
-      } else if (inputStep === 1 && !this.inputs[0].includes( '.' ) ) {
+      } else if (inputStep === 1 && !this.inputs[0].includes('.')) {
         //Update inputs array
         this.inputs[0] += button;
         //update the screen
@@ -140,7 +140,7 @@ class Calculator extends React.Component {
         this.inputs.push(button);
         //update the screen
         this.setState({ screen: this.inputs[2] });
-      } else if (inputStep === 3 && !this.inputs[2].includes( '.' ) ) {
+      } else if (inputStep === 3 && !this.inputs[2].includes('.')) {
         //Update inputs array
         this.inputs[2] += button;
         //update the screen
@@ -153,7 +153,8 @@ class Calculator extends React.Component {
       }
     } else if (isEqu(button)) {
       if (inputStep === 3) {
-        let calculation = doCalculation(this.inputs).toPrecision( this.MAXSCREENDIGITS );
+        let calculation = doCalculation(this.inputs).toPrecision(this.MAXSCREENDIGITS);
+        this.postCalculation( this.inputs, calculation );
         //update inputs array
         this.inputs = [];
         //update the screen
@@ -164,6 +165,36 @@ class Calculator extends React.Component {
       //update the screen
       this.setState({ screen: 0 });
     }
+  }
+
+  postCalculation(inputs, output) {
+    let x = String(inputs[0]),
+      op = inputs[1],
+      y = String(inputs[2]),
+      val = String(output),
+      date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let calculation = new URLSearchParams();
+    calculation.append("x", x);
+    calculation.append("op", op);
+    calculation.append("y", y);
+    calculation.append("val", val);
+    calculation.append("date", date);
+    fetch("../backend/addCalculation.php", {
+      method: "POST",
+      body: calculation
+    }).then((response) => response.json())
+      .then(result => {
+        if (!result.error) {
+          //do something
+        } else {
+          this.error("There was an error");
+        }
+      }).catch((reason) => {
+        this.error("There was an error " + reason );
+      });
+  }
+  error( message ){
+    console.log( message );
   }
 
   render() {
@@ -178,7 +209,7 @@ function isDigit(str) {
   return str.length === 1 && /[0-9]/.test(str);
 }
 
-function isDecPoint( str ){
+function isDecPoint(str) {
   return str === '.';
 }
 
@@ -194,10 +225,10 @@ function isClear(str) {
   return str === 'c';
 }
 
-function doCalculation(inputs){
+function doCalculation(inputs) {
   let op = inputs[1];
-  let x = parseFloat( inputs[0] );
-  let y = parseFloat( inputs[2] );
+  let x = parseFloat(inputs[0]);
+  let y = parseFloat(inputs[2]);
   if (op === '+') {
     return x + y;
   } else if (op === '-') {
