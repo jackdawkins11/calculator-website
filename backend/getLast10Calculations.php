@@ -16,7 +16,7 @@ function getLast10CalculationsAux( $dsn, $dbusername, $dbpassword ){
     }
     try{
         $pdo = new PDO( $dsn, $dbusername, $dbpassword );
-        $sql = "SELECT  X, Op, Y, UserKey, Date FROM Calculations ORDER BY Date DESC LIMIT 10";
+        $sql = "SELECT  X, Op, Y, Val, UserKey, Date FROM Calculations ORDER BY Date DESC LIMIT 10";
         $sth = $pdo->prepare( $sql );
         $error = !$sth->execute();
         $result = $sth->fetchAll();

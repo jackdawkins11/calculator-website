@@ -71,7 +71,10 @@ class MessageBox extends React.Component{
         );
     }
     componentDidMount(){
-        this.getMessages();
+        this.messageRefresher = setInterval( () => this.getMessages(), 500 );
+    }
+    componentWillUnmount(){
+        clearInterval( this.messageRefresher );
     }
     getMessages(){
         fetch( "../backend/getLast10Calculations.php" )
@@ -94,9 +97,13 @@ class MessageBox extends React.Component{
 function calculationToMessage( calculation ){
     let username = calculation[ 'Username' ];
     let time = new Date( calculation['Date'] );
-    let content = calculation[ 'X' ] + ' ' + calculation[ 'Op'] + ' ' + calculation[ 'Y']; 
+    let content = calculation[ 'X' ] + ' ' + calculation[ 'Op'] + ' ' + calculation[ 'Y']
+        + " = " + calculation[ 'Val' ];
     let avatarChar = username[0].toUpperCase();
-    let hours = time.getHours() % 12 + 1;
+    let hours = time.getHours() % 12;
+    if( hours == 0 ){
+        hours = 12;
+    }
     let minutes = time.getMinutes();
     let partOfDay = time.getHours() >= 12 ? "pm" : "am";
     time = String( hours ) + ":" + String( minutes ) + " " + partOfDay; 
