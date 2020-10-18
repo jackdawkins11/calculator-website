@@ -14,7 +14,7 @@ class App extends React.Component{
     }
     render(){
         if( this.state.hasSession ){
-            return ( <HomePage /> );
+            return ( <HomePage signOut={ () => this.signOut() }/> );
         }else{
             return (
                 <AuthPage

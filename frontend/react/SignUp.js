@@ -17,7 +17,7 @@ function SignUpPassword(props) {
             <div className="auth-content-label">
                 Password
             </div>
-            <input className="auth-content-input" onChange={props.onChange} ></input>
+            <input type="password" className="auth-content-input" onChange={props.onChange} ></input>
         </div>
     );
 }
@@ -28,7 +28,7 @@ function SignUpPasswordConfirm(props) {
             <div className="auth-content-label">
                 Confirm Password
             </div>
-            <input className="auth-content-input" onChange={props.onChange} ></input>
+            <input type="password" className="auth-content-input" onChange={props.onChange} ></input>
         </div>
     );
 }

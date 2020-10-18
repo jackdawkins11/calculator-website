@@ -5,7 +5,7 @@ function HomePage(props) {
     return (
         <div className="homepage">
             <div className="homepage-top-bar">
-                <div className="sign-out-button" onClick={() => this.signOut()}>
+                <div className="sign-out-button" onClick={props.signOut}>
                     Sign Out
                 </div>
             </div>
