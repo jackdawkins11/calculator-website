@@ -1,11 +1,11 @@
-#Calculator app
+# Calculator app
 A webpage with a calculator and a list of recent calculations.
 
-##Using it
+## Using it
 The site is running live here: http://18.189.13.31/frontend/
 Create an account, sign in, and then use the calculator and see recent calculations made by any of the users.
 
-##Host it yourself
+## Host it yourself
 The backend uses PHP and MySQL. The frontend uses React with JSX. To set up:
 * Set up a PHP server. On Ubuntu this is as simple as `sudo apt install apache2 mysql-server php7.2-cli php-mysql && sudo service apache2 start`
 * Clone this repository to your server
