@@ -1,6 +1,10 @@
 import { Calculator } from './Calculator.js';
 import { MessageBox } from './MessageBox.js';
 
+/*
+Renders the home page.
+*/
+
 function HomePage(props) {
     return (
         <div className="homepage">

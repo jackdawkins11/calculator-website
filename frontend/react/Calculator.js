@@ -25,9 +25,13 @@ let calculatorButtonValues =
   ['*', '9', '6', '3', 'c'],
   ['/', '=']];
 
+
+/*
+Renders the calculator.
+*/
+
 function CalculatorRender(props) {
   let columns = [];
-  //Add the first 3 columns
   for (let c = 0; c < 4; c++) {
     let column = [];
     for (let r = 0; c < 3 && r < 5 || c ===3 && r < 2; r++) {
@@ -49,21 +53,6 @@ function CalculatorRender(props) {
     }
     columns.push(<div className="calculator-column" key={c}>{column}</div>);
   }
-  /*
-  //Add the last column
-  let buttons = [calculatorButtonValues[3][0], calculatorButtonValues[3][1]];
-  let column = [
-    <CalculatorButton
-      key={buttons[0]}
-      calculatorButtonValue={buttons[0]}
-      onClick={() => props.buttonClick(buttons[0])} />,
-    <CalculatorEqualButton
-      key={buttons[1]}
-      calculatorButtonValue={buttons[1]}
-      onClick={() => props.buttonClick(buttons[1])} />
-  ];
-  columns.push(<div className="calculator-column" key={3}>{column}</div>);
-  */
   return (
     <div className="calculator-area">
       <div className="calculator">
@@ -108,51 +97,34 @@ class Calculator extends React.Component {
     let inputStep = this.inputs.length;
     if (isDigit(button)) {
       if (inputStep === 0) {
-        //Update the inputs array
         this.inputs.push(button);
-        //update the screen
         this.setState({ screen: this.inputs[0] });
       } else if (inputStep === 1) {
-        //Update inputs array
         this.inputs[0] += button;
-        //update the screen
         this.setState({ screen: this.inputs[0] });
       } else if (inputStep === 2) {
-        //Update inputs array
         this.inputs.push(button);
-        //update the screen
         this.setState({ screen: this.inputs[2] });
       } else if (inputStep === 3) {
-        //Update inputs array
         this.inputs[2] += button;
-        //update the screen
         this.setState({ screen: this.inputs[2] });
       }
     } else if (isDecPoint(button)) {
       if (inputStep === 0) {
-        //Update the inputs array
         this.inputs.push(button);
-        //update the screen
         this.setState({ screen: this.inputs[0] });
       } else if (inputStep === 1 && !this.inputs[0].includes('.')) {
-        //Update inputs array
         this.inputs[0] += button;
-        //update the screen
         this.setState({ screen: this.inputs[0] });
       } else if (inputStep === 2) {
-        //Update inputs array
         this.inputs.push(button);
-        //update the screen
         this.setState({ screen: this.inputs[2] });
       } else if (inputStep === 3 && !this.inputs[2].includes('.')) {
-        //Update inputs array
         this.inputs[2] += button;
-        //update the screen
         this.setState({ screen: this.inputs[2] });
       }
     } else if (isOp(button)) {
       if (inputStep === 1) {
-        //Update inputs array
         this.inputs.push(button);
       }
     } else if (isEqu(button)) {
@@ -160,18 +132,18 @@ class Calculator extends React.Component {
         let calculation = doCalculation(this.inputs).toPrecision(this.MAXSCREENDIGITS);
         calculation = parseFloat(calculation);
         this.postCalculation(this.inputs, calculation);
-        //update inputs array
         this.inputs = [];
-        //update the screen
         this.setState({ screen: calculation });
       }
     } else if (isClear(button)) {
       this.inputs = [];
-      //update the screen
       this.setState({ screen: 0 });
     }
   }
 
+  /*
+  Sends a calculation to the server.
+  */
   postCalculation(inputs, output) {
     let x = String(inputs[0]),
       op = inputs[1],
@@ -230,6 +202,11 @@ function isClear(str) {
   return str === 'c';
 }
 
+/*
+Does the calculation on the given inputs array.
+inputs is of the form [ number, operation, number ]
+*/
+
 function doCalculation(inputs) {
   let op = inputs[1];
   let x = parseFloat(inputs[0]);
@@ -245,6 +222,10 @@ function doCalculation(inputs) {
   }
 }
 
+/*
+Generates a string representation of the current time
+in a MySQL datetime formate.
+*/
 function getDateTimeString() {
   let date = new Date();
   return date.getFullYear()

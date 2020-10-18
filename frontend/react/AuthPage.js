@@ -1,6 +1,10 @@
 import { SignIn } from './SignIn.js';
 import { SignUp } from './SignUp.js';
 
+/*
+Renders the tab bar on the authorization page.
+*/
+
 function TabBar(props) {
     let signInClasses = "tab " + (props.signInTab ? "tab-active" : "tab-inactive");
     let signUpClasses = "tab " + (!props.signInTab ? "tab-active" : "tab-inactive");
@@ -11,6 +15,10 @@ function TabBar(props) {
         </div>
     );
 }
+
+/*
+Renders the authorization page.
+*/
 
 function AuthPageRender( props ){
     return (
@@ -23,6 +31,11 @@ function AuthPageRender( props ){
         </div>
     );
 }
+
+/*
+Maintains state and handles logic for the authorization page.
+Renders the authorization page using AuthPageRender.
+*/
 
 class AuthPage extends React.Component {
     constructor(props) {

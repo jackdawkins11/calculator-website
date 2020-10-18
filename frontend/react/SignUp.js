@@ -55,6 +55,10 @@ function SignUpButton(props) {
     );
 }
 
+/*
+SignUp component. Renders a form for signing up. Handles logic for signing up.
+Displays a message when signing up fails or succeeds.
+*/
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -91,6 +95,9 @@ class SignUp extends React.Component {
             confirmPassword: event.target.value
         });
     }
+    /*
+    Tries to create an account with the given credentials.
+    */
     signUp() {
         let username = this.state.username,
             password = this.state.password,
@@ -103,6 +110,10 @@ class SignUp extends React.Component {
             this.signUpRequest(username, password);
         }
     }
+    /*
+    Requests the server to make an account with the given credentials.
+    Displays a message on failure or success.
+    */
     signUpRequest(username, password) {
         let credentials = new URLSearchParams();
         credentials.append("username", username);

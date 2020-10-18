@@ -1,6 +1,11 @@
 import { AuthPage } from './AuthPage.js';
 import { HomePage } from './HomePage.js';
 
+/*
+The root of all components. Checks for a session
+with the server and then renders either the
+sign in page or the home page.
+*/
 
 class App extends React.Component{
     constructor(props){

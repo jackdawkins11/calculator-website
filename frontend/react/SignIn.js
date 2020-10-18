@@ -1,5 +1,10 @@
 'use strict';
 
+/*
+Renders a div containing the input element
+for the username
+*/
+
 function SignInUsername(props) {
     return (
         <div className="auth-content">
@@ -11,6 +16,11 @@ function SignInUsername(props) {
     );
 }
 
+/*
+Renders a div containing the input element
+for the password
+*/
+
 function SignInPassword(props) {
     return (
         <div className="auth-content">
@@ -21,6 +31,10 @@ function SignInPassword(props) {
         </div>
     );
 }
+
+/*
+Renders a div containing a message
+*/
 
 function SignInMessage(props) {
     let hide = props.message.length == 0;
@@ -34,6 +48,10 @@ function SignInMessage(props) {
     );
 }
 
+/*
+Renders a div containing the button for signing in.
+*/
+
 function SignInButton(props) {
     return (
         <div className="auth-content">
@@ -43,6 +61,13 @@ function SignInButton(props) {
         </div>
     );
 }
+
+/*
+The SignIn component. Renders a div containing a form for signing in.
+
+Handles signing in logic. When a sign in is successfull, calls props.signIn()
+to change to the HomePage component.
+*/
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -63,16 +88,28 @@ class SignIn extends React.Component {
             </div>
         );
     }
+    /*
+    Updates this.state.username
+    */
     changeUsername(event) {
         this.setState({
             username: event.target.value
         });
     }
+    /*
+    Updates this.state.password
+    */
     changePassword(event) {
         this.setState({
             password: event.target.value
         });
     }
+
+    /*
+    Tries to start a session with the given credentials. On failure,
+    displays a message. On success, calls props.signIn() to switch to
+    the home page.
+    */
     signIn() {
         let username = this.state.username;
         let password = this.state.password;
@@ -97,11 +134,17 @@ class SignIn extends React.Component {
                 this.errorMessage();
             });
     }
+    /*
+    Displays a message.
+    */
     invalidCredentials() {
         this.setState({
             message: "Invalid username and password."
         });
     }
+    /*
+    Displays a message.
+    */
     errorMessage() {
         this.setState({
             message: "There was an error signing in."

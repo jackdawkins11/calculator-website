@@ -1,5 +1,10 @@
 'use strict';
 
+/*
+The following 2 functions render inner parts
+of a message.
+*/
+
 function MessageLeft(props) {
     return (
         <div className="message-left">
@@ -22,6 +27,9 @@ function MessageRight(props) {
     );
 }
 
+/*
+Renders a single message.
+*/
 function Message(props) {
     return (
         <div className={"message " + props.parity}>
@@ -33,6 +41,9 @@ function Message(props) {
     );
 }
 
+/*
+Renders the MessageBox.
+*/
 function MessageBoxRender(props) {
     let rows = props.messages.map((message, idx) => {
         let parity = idx % 2 == 0 ? 'even' : 'odd';
@@ -49,6 +60,12 @@ function MessageBoxRender(props) {
     );
 }
 
+/*
+MessageBox class.
+
+Keeps an updated list of the last 10 calculations. Renders the
+MessageBox.
+*/
 class MessageBox extends React.Component{
     constructor(props){
         super(props);
@@ -61,12 +78,18 @@ class MessageBox extends React.Component{
             <MessageBoxRender messages={this.state.messages} />
         );
     }
+    /*
+    Calls getMessages() every half second.
+    */ 
     componentDidMount(){
         this.messageRefresher = setInterval( () => this.getMessages(), 500 );
     }
     componentWillUnmount(){
         clearInterval( this.messageRefresher );
     }
+    /*
+    Gets the last 10 calculations from the server.
+    */
     getMessages(){
         fetch( "../backend/getLast10Calculations.php" )
             .then( response => response.json() )
@@ -85,6 +108,25 @@ class MessageBox extends React.Component{
     }
 }
 
+/*
+Transforms a calculation from the database into a form suitable
+for displaying.
+
+The input, 'calculation', has the form
+    calculation[ 'Username' ] = (string) the username associated with the calculation
+    calculation[ 'Date' ] = (string) MySQL datetime string for when the calculation was made
+    calculation[ 'X' ] = (string) the first number in the calculation
+    calculation[ 'Op' ] = (string) the operation in the calculation
+    calculation[ 'Y' ] = (string) the second number in the calculation
+    calculation[ 'Val' ] = (string) the output of the calculation
+
+The output is an object containing the following
+    messageSenderName (string) the username associated with the calculation
+    avatarChar (string) the first letter of the username
+    messageTime (string) string representation of the time of day the calculation was made
+    messageContent (string) string displaying the calculation
+
+*/
 function calculationToMessage( calculation ){
     let username = calculation[ 'Username' ];
     let time = new Date( calculation['Date'] );
@@ -105,6 +147,5 @@ function calculationToMessage( calculation ){
         messageContent: content
     };
 }
-
 
 export { MessageBox };
