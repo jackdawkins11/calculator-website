@@ -34,11 +34,10 @@ function SignUpPasswordConfirm(props) {
 }
 
 function SignUpMessage(props) {
-    let hide = props.message.length == 0;
-    let hideClassName = hide ? "hide" : "";
+    let classNames = "auth-content-message " + props.classNames;
     return (
         <div className="auth-content">
-            <div className="auth-content-message">
+            <div className={classNames}>
                 {props.message}
             </div>
         </div>
@@ -66,7 +65,8 @@ class SignUp extends React.Component {
             username: "",
             password: "",
             confirmPassword: "",
-            message: ""
+            message: "",
+            messageClassNames: ""
         };
     }
     render() {
@@ -75,7 +75,8 @@ class SignUp extends React.Component {
                 <SignUpUsername onChange={(event) => this.changeUsername(event)} />
                 <SignUpPassword onChange={(event) => this.changePassword(event)} />
                 <SignUpPasswordConfirm onChange={(event) => this.changeConfirmPassword(event)} />
-                <SignUpMessage message={this.state.message} />
+                <SignUpMessage message={this.state.message}
+                    classNames={this.state.messageClassNames}/>
                 <SignUpButton onClick={() => this.signUp()} />
             </div>
         );
@@ -138,17 +139,20 @@ class SignUp extends React.Component {
     }
     success() {
         this.setState({
-            message: "Successfully created account"
+            message: "Successfully created account",
+            messageClassNames: "message-green"
         });
     }
     invalidInput(message) {
         this.setState({
-            message: "Invalid input: " + message
+            message: "Invalid input: " + message,
+            messageClassNames: "message-red"
         });
     }
     error() {
         this.setState({
-            message: "There was an error signing up"
+            message: "There was an error signing up",
+            messageClassNames: "message-red"
         });
     }
 }

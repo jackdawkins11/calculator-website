@@ -80,8 +80,12 @@
     color: white;
 }
 
-.auth-content-message{
+.message-red{
     color: rgb(170, 38, 38);
+}
+
+.message-green{
+    color: rgb(8, 122, 8);
 }
 
 .auth-content-button{

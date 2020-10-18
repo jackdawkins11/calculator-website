@@ -37,11 +37,9 @@ Renders a div containing a message
 */
 
 function SignInMessage(props) {
-    let hide = props.message.length == 0;
-    let hideClassName = hide ? "hide" : "";
     return (
         <div className="auth-content">
-            <div className="auth-content-message">
+            <div className="auth-content-message message-red">
                 {props.message}
             </div>
         </div>
