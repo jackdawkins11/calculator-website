@@ -6,8 +6,8 @@ function TabBar(props) {
     let signUpClasses = "tab " + (!props.signInTab ? "tab-active" : "tab-inactive");
     return (
         <div className="tab-bar">
-            <div className={signInClasses} onClick={() => props.tabClick(true)} > Sign In </div>
-            <div className={signUpClasses} onClick={() => props.tabClick(false)} > Sign Up </div>
+            <div className={signInClasses} onClick={() => props.tabClick(true)} > SIGN IN </div>
+            <div className={signUpClasses} onClick={() => props.tabClick(false)} > SIGN UP </div>
         </div>
     );
 }
