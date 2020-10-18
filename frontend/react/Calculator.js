@@ -9,17 +9,9 @@ function CalculatorScreen(props) {
 }
 
 function CalculatorButton(props) {
+  let classNames = "calculator-button " + props.classNames;
   return (
-    <div className="calculator-button"
-      onClick={props.onClick} >
-      {props.calculatorButtonValue}
-    </div>
-  );
-}
-
-function CalculatorEqualButton(props) {
-  return (
-    <div className="calculator-button equal-button"
+    <div className={classNames}
       onClick={props.onClick} >
       {props.calculatorButtonValue}
     </div>
@@ -36,19 +28,28 @@ let calculatorButtonValues =
 function CalculatorRender(props) {
   let columns = [];
   //Add the first 3 columns
-  for (let c = 0; c < 3; c++) {
+  for (let c = 0; c < 4; c++) {
     let column = [];
-    for (let r = 0; r < 5; r++) {
+    for (let r = 0; c < 3 && r < 5 || c ===3 && r < 2; r++) {
       let button = calculatorButtonValues[c][r];
+      let classNames = "";
+      if( c === 3 && r == 1 ){
+        classNames +=  "equal-button";
+      }
+      if( r === 0 ){
+        classNames += " operator-button";
+      }
       column.push(
         <CalculatorButton
           key={button}
+          classNames={classNames}
           calculatorButtonValue={button}
           onClick={() => props.buttonClick(button)} />
       );
     }
     columns.push(<div className="calculator-column" key={c}>{column}</div>);
   }
+  /*
   //Add the last column
   let buttons = [calculatorButtonValues[3][0], calculatorButtonValues[3][1]];
   let column = [
@@ -62,6 +63,7 @@ function CalculatorRender(props) {
       onClick={() => props.buttonClick(buttons[1])} />
   ];
   columns.push(<div className="calculator-column" key={3}>{column}</div>);
+  */
   return (
     <div className="calculator-area">
       <div className="calculator">
