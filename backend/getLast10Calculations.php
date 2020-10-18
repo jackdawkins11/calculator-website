@@ -30,7 +30,7 @@ function getLast10CalculationsAux( $dsn, $dbusername, $dbpassword ){
 Gets the username associated with the given key from the db.
 Returns array with two objects
     error (bool) whether there was an error
-    username (string) the username associaed with the given key. Only valid when error=False
+    username (string) the username associated with the given key. Only valid when error=False
 */
 
 function getUsername( $userKey, $dsn, $dbusername, $dbpassword ){
@@ -46,7 +46,7 @@ function getUsername( $userKey, $dsn, $dbusername, $dbpassword ){
     $username = "";
     if( !$error && count( $result ) != 1 ){
         $error = True;
-    }else{
+    }else if( !$error && count( $result ) == 1 ){
         $username = $result[ 0 ][ "Username" ];
     }
     return array( "error" => $error, "username" => $username );
