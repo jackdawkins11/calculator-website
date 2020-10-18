@@ -10,6 +10,7 @@
 
 .homepage-top-bar{
     border-bottom: 2px solid black;
+    background: rgb(16, 57, 73);
 }
 
 .sign-out-button{
@@ -19,13 +20,15 @@
 
     text-align: center;
     
-    background: gray;
+    background: rgb(57, 106, 212);
 
-    border-radius: 10px;
+    border-radius: 20px;
 
     font-size: 2rem;
 
     cursor: pointer;
+
+    color: white;
 }
 
 .homepage-main {
