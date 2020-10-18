@@ -129,7 +129,7 @@ The output is an object containing the following
 */
 function calculationToMessage( calculation ){
     let username = calculation[ 'Username' ];
-    let time = new Date( calculation['Date'] );
+    let time = new Date( calculation['Date'].replace(/-/g, '/') );
     let content = calculation[ 'X' ] + ' ' + calculation[ 'Op'] + ' ' + calculation[ 'Y']
         + " = " + calculation[ 'Val' ];
     let avatarChar = username[0].toUpperCase();
