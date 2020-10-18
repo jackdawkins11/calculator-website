@@ -1,6 +1,6 @@
-import {Calculator} from './Calculator.js';
-import {MessageBox} from './MessageBox.js';
 import { AuthPage } from './AuthPage.js';
+import { HomePage } from './HomePage.js';
+
 
 class App extends React.Component{
     constructor(props){
@@ -14,19 +14,7 @@ class App extends React.Component{
     }
     render(){
         if( this.state.hasSession ){
-            return (
-                <div className="homepage">
-                    <div className="homepage-top-bar">
-                        <div className="sign-out-button" onClick={() => this.signOut()}>
-                            Sign Out
-                        </div>
-                    </div>
-                    <div className="homepage-main">
-                        <Calculator />
-                        <MessageBox />
-                    </div>
-                </div>
-                );
+            return ( <HomePage /> );
         }else{
             return (
                 <AuthPage
