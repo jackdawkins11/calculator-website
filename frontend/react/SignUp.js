@@ -124,13 +124,11 @@ class SignUp extends React.Component {
             body: credentials
         }).then((response) => response.json())
             .then(result => {
-                if (!result.error) {
-                    if (result.available) {
-                        this.success();
-                    } else {
-                        this.invalidInput("That username is in use");
-                    }
-                } else {
+                if( !result.error && result.createdAccount ){
+                    this.success();
+                }else if( !result.error && !result.createdAccount ){
+                    this.invalidInput( result.message );
+                }else{
                     this.error();
                 }
             }).catch((reason) => {
@@ -145,7 +143,7 @@ class SignUp extends React.Component {
     }
     invalidInput(message) {
         this.setState({
-            message: "Invalid input: " + message,
+            message: message,
             messageClassNames: "message-red"
         });
     }
