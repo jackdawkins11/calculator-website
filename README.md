@@ -11,5 +11,5 @@ The backend uses PHP and MySQL. The frontend uses React with JSX. To set up:
 * Clone this repository to your server
 * Set up the database. Create a MySQL user and put its username and password into the `config.php` file in this repository. Run the command `php install.php`
 * Set up a JSX preprocessor. You can do so by following the steps at the bottom of this page https://reactjs.org/docs/add-react-to-a-website.html
-* Create a folder called `react_compiled` inside the `frontend` folder. Run the JSX preprocessor on all of the JavaScript files in the `frontend/react` folder and put the output into the `react_compiled` folder.
+* Create a folder called `react_compiled` inside the `public/frontend` folder. Run the JSX preprocessor on all of the JavaScript files in the `public/frontend/react` folder and put the output into the `react_compiled` folder.
 
