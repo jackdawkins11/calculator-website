@@ -1,6 +1,6 @@
 <?php
 
-require "../../config.php";
+require "config.php";
 
 /*
 Executes the below query on the database.
