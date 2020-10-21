@@ -70,6 +70,9 @@ class SignUp extends React.Component {
         };
     }
     render() {
+        let passwordStengthMessage = "*Passwords must be at least 10 characters long"
+            + " and contain at least 1 uppercase letter, lowercase letter, number and symbol from"
+            + " !@#$%^&*()";
         return (
             <div className="sign-up">
                 <SignUpUsername onChange={(event) => this.changeUsername(event)} />
@@ -78,6 +81,8 @@ class SignUp extends React.Component {
                 <SignUpMessage message={this.state.message}
                     classNames={this.state.messageClassNames}/>
                 <SignUpButton onClick={() => this.signUp()} />
+                <SignUpMessage message={passwordStengthMessage}
+                    classNames="password-strength-message" />
             </div>
         );
     }

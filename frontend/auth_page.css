@@ -88,6 +88,11 @@
     color: rgb(8, 122, 8);
 }
 
+.password-strength-message{
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+}
+
 .auth-content-button{
     text-align: center;
 
